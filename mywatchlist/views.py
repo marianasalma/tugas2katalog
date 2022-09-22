@@ -6,8 +6,12 @@ from django.core import serializers
 # TODO: Create your views here.
 def show_watchlist(request):
     data_watchlist = WatchlistItem.objects.all()
+    watched_true = WatchlistItem.objects.filter(watched=True)
+    watched_false = WatchlistItem.objects.filter(watched=False)
     context = {
         'list_watchlist': data_watchlist,
+        'number_watched' : watched_true.count,
+        'number_not_watched' : watched_false.count,
         'nama': 'Mariana Salma',
         'npm' : '2106702516'
     }

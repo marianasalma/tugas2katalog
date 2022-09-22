@@ -30,5 +30,10 @@
     </tr>
     {% endfor %}
   </table>
+    {% if number_watched >= number_not_watched%}
+    <h4>Selamat, kamu sudah banyak menonton!</h4>
+    {% else %}
+    <h4>Wah, kamu masih sedikit menonton!</h4>
+    {% endif %}
 
  {% endblock content %}
