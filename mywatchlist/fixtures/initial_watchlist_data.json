@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "La La Land",
+            "rating": 5,
+            "release_date": "Dec 13, 1988",
+            "review": "film favoritnya temen aku"
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Pride and Prejudice",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 3,
+        "fields": {
+            "watched": true,
+            "title": "Minions",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 4,
+        "fields": {
+            "watched": true,
+            "title": "Clueless",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 5,
+        "fields": {
+            "watched": true,
+            "title": "Avatar",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 6,
+        "fields": {
+            "watched": true,
+            "title": "Avatar",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 7,
+        "fields": {
+            "watched": true,
+            "title": "Harry Potter",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 8,
+        "fields": {
+            "watched": true,
+            "title": "Narnia",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 9,
+        "fields": {
+            "watched": true,
+            "title": "Crawdads",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    },
+    {
+        "model": "mywatchlist.watchlistitem",
+        "pk": 10,
+        "fields": {
+            "watched": true,
+            "title": "Chef",
+            "rating": 5,
+            "release_date": "Dec 1, 2002",
+            "review": "Lorem ipsum dolor sit amet."
+        }
+    }
+]
