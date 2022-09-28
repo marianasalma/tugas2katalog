@@ -5,6 +5,9 @@
 {% endblock meta %}
 
 {% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
 
 <div class = "login">
 
@@ -14,20 +17,16 @@
         {% csrf_token %}
         <table>
             <tr>
-                <td>Username: </td>
+                <th>Username: </th>
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
             </tr>
                     
             <tr>
-                <td>Password: </td>
+                <th>Password: </th>
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
             </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
         </table>
+        <input class="btn login_btn" type="submit" value="Login" style="margin-top:20px; background-color: #f8f1f2; border: 4px solid #F2BAC2; font-family: Georgia, 'Times New Roman', Times, serif; padding: 10px; color: #603d4c;">
     </form>
 
     {% if messages %}
