@@ -1,23 +1,40 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
 
- {% block content %}
+<h1>TODO List</h1>
 
-  <h1>TODO List</h1>
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Title</th>
+    <th>Description</th>
+  </tr>
+  {% csrf_token %} {% comment %} Add the data below this line {% endcomment %}
+  {% for item in list_todolist %}
+  <tr>
+    <th>{{item.date}}</th>
+    <th>{{item.title}}</th>
+    <th>{{item.description}}</th>
+    <form method="POST">
+        {% csrf_token %}
+      <th>
+        <button type="submit" name="pk_task_delete" value="{{item.pk}}">
+          Delete
+        </button>
+      </th>
+    </form>
+    {% if item.is_finished == False %}
+    <form method="POST">
+        {% csrf_token %}
+      <th>
+        <button type="submit" name="pk_task" value="{{item.pk}}">
+          Selesai
+        </button>
+      </th>
+    </form>
 
-  <table>
-    <tr>
-      <th>Date</th>
-      <th>Title</th>
-      <th>Description</th>
-    </tr>
-    {% comment %} Add the data below this line {% endcomment %}
-    {% for item in list_todolist %}
-    <tr>
-        <th>{{item.date}}</th>
-        <th>{{item.title}}</th>
-        <th>{{item.description}}</th>
-    </tr>
-    {% endfor %}
-  </table>
-
- {% endblock content %}
+    {% endif %}
+  </tr>
+  {% endfor %}
+</table>
+<button><a href="/todolist/create-task">Create New Task</a></button>
+{% endblock content %}

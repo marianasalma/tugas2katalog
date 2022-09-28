@@ -19,6 +19,16 @@ def show_todolist(request):
         'list_todolist': data_todolist,
         'username': request.user.username,
     }
+    if request.method == "POST":
+        if request.POST.get('pk_task') is not None:
+            id_current_task = request.POST.get('pk_task')
+            current_task = Task.objects.filter(pk=id_current_task)
+            current_task.update(is_finished=True)
+        else:
+            id_current_task = request.POST.get('pk_task_delete')
+            current_task = Task.objects.filter(pk=id_current_task)
+            current_task.delete()
+            
     return render(request, "todolist.html", context)
 
 def register(request):
