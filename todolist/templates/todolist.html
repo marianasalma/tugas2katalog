@@ -1,40 +1,54 @@
 {% extends 'base.html' %} {% block content %}
+{% load static %}
 
-<h1>TODO List</h1>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<h1 style="text-align:center">୨୧ My To-do List ୨୧</h1>
 
 <table>
   <tr>
     <th>Date</th>
     <th>Title</th>
     <th>Description</th>
+    <th>Done</th>
+    <th>Delete Task</th>
+    <th>Finish Task</th>
   </tr>
   {% csrf_token %} {% comment %} Add the data below this line {% endcomment %}
   {% for item in list_todolist %}
   <tr>
-    <th>{{item.date}}</th>
-    <th>{{item.title}}</th>
-    <th>{{item.description}}</th>
+    <td>{{item.date}}</td>
+    <td>{{item.title}}</td>
+    <td>{{item.description}}</td>
+    <td>{{item.is_finished}}</td>
     <form method="POST">
         {% csrf_token %}
-      <th>
+      <td>
         <button type="submit" name="pk_task_delete" value="{{item.pk}}">
           Delete
         </button>
-      </th>
+      </td>
     </form>
     {% if item.is_finished == False %}
     <form method="POST">
         {% csrf_token %}
-      <th>
+      <td>
         <button type="submit" name="pk_task" value="{{item.pk}}">
           Selesai
         </button>
-      </th>
+      </td>
     </form>
-
+    {% else %}
+    <form method="POST">
+      {% csrf_token %}
+    <td>
+      <button type="submit" name="pk_task_reverse" value="{{item.pk}}">
+        Belum Selesai
+      </button>
+    </td>
+  </form>
     {% endif %}
   </tr>
   {% endfor %}
 </table>
-<button><a href="/todolist/create-task">Create New Task</a></button>
+<button style="margin-top: 20px;"><a href="/todolist/create-task">Create New Task</a></button>
 {% endblock content %}

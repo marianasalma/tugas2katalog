@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-# from forms import CreateTaskForm
 
 # Create your views here.
 @login_required(login_url='/todolist/login/')
@@ -24,11 +23,15 @@ def show_todolist(request):
             id_current_task = request.POST.get('pk_task')
             current_task = Task.objects.filter(pk=id_current_task)
             current_task.update(is_finished=True)
-        else:
+        elif request.POST.get('pk_task_delete') is not None:
             id_current_task = request.POST.get('pk_task_delete')
             current_task = Task.objects.filter(pk=id_current_task)
             current_task.delete()
-            
+        else:
+            id_current_task = request.POST.get('pk_task_reverse')
+            current_task = Task.objects.filter(pk=id_current_task)
+            current_task.update(is_finished=False)
+
     return render(request, "todolist.html", context)
 
 def register(request):
@@ -65,7 +68,6 @@ def logout_user(request):
     return response
 
 def create(request):
-    # form = CreateTaskForm()
     if request.method == 'POST':
         date = datetime.date.today() 
         title = request.POST.get('title')

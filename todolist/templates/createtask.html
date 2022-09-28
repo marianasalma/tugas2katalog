@@ -1,26 +1,26 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block meta %}
+{% load static %}
 
-{% block meta %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
 <title>Membuat Task</title>
-{% endblock meta %}
+{% endblock meta %} {% block content %}
 
-{% block content %}  
+<div class="login" style="margin-left: 50px;">
+  <h1>Form Pembuatan Task Baru</h1>
 
-<div class = "login">
-    
-    <h1>Form Pembuatan Task Baru</h1>  
+  <form method="POST">
+    {% csrf_token %}
+    <div>
+      <label for="title"><strong>Title</strong></label>
+      <input type="text" name="title" />
+    </div>
+    <div style="margin-top: 20px;">
+      <label for="description"><strong>Task description</strong></label>
+      <input type="text" name="description" />
+    </div>
 
-        <form method="POST" >  
-            {% csrf_token %}  
-            <label for="title">Title</label>
-            <input type="text" name="title"/>
-            <label for="description">Task description</label>
-            <input type="text" name="description"/>
-            
-            <input type="submit" name="submit" value="Daftar"/>
-            
-        </form>
-
-</div>  
+    <input type="submit" name="submit" value="Daftar" class="vertical-center" style="margin-top:20px; background-color: #F2BAC2; border: 2px solid #F2BAC2; font-family: Georgia, 'Times New Roman', Times, serif; padding: 10px; color: white;"/>
+  </form>
+</div>
 
 {% endblock content %}
