@@ -78,14 +78,3 @@ def create(request):
         return response
     return render(request, "createtask.html")
         
-#     return redirect('todolist:')
-
-# def delete
-
-# def show_xml(request):
-#     data = Task.objects.all()
-#     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
-# def show_json(request):
-#     data = Task.objects.all()
-#     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
