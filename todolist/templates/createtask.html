@@ -2,25 +2,57 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'style.css' %}">
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+  </head>
+<body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+      crossorigin="anonymous"
+    ></script>
 <title>Membuat Task</title>
 {% endblock meta %} {% block content %}
 
-<div class="login" style="margin-left: 50px;">
-  <h1>Form Pembuatan Task Baru</h1>
+<div class="login" >
+  <div class="d-flex flex-column align-items-center">
 
-  <form method="POST">
-    {% csrf_token %}
+    <h1 class="m-5" style="text-align: center;">Form Pembuatan Task Baru</h1>
     <div>
-      <label for="title"><strong>Title</strong></label>
-      <input type="text" name="title" />
-    </div>
-    <div style="margin-top: 20px;">
-      <label for="description"><strong>Task description</strong></label>
-      <input type="text" name="description" />
-    </div>
 
-    <input type="submit" name="submit" value="Daftar" style="margin-top:20px; background-color: #F2BAC2; border: 2px solid #F2BAC2; font-family: Georgia, 'Times New Roman', Times, serif; padding: 10px; color: white;"/>
-  </form>
-</div>
+      <div class="card m-2" style="width: 25rem; text-align: center;">
+        <div class="card-body">
+          <form method="POST">
+            {% csrf_token %}
+            <div>
+              <label for="title"><strong>Title</strong></label>
+              <input type="text" name="title" style="width: 100%;"/>
+            </div>
+            <div style="margin-top: 20px;">
+              <label for="description"><strong>Task description</strong></label>
+              <input style="width: 100%;" type="text" name="description" />
+            </div>
+            
+            <input type="submit" name="submit" value="Daftar" style="margin-top:20px; background-color: #F2BAC2; border: 2px solid #F2BAC2; font-family: Georgia, 'Times New Roman', Times, serif; padding: 10px; color: white;"/>
+          </form>
+        </div>
+    </div>
+  </div>
+  </div>
+  </div>
 
+</body>
+</html>
 {% endblock content %}

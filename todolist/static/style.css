@@ -4,10 +4,12 @@ body {
     color: #603d4c;
   }
   
-  h1 {
+  
+  h1, h3 {
     color: #603d4c;
     font-family: Georgia, 'Times New Roman', Times, serif;
   }
+
 
   table {
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -36,9 +38,22 @@ body {
     padding: 8px;
     color: white;
     text-align: center;
+
   }
 
   label {
     display: block;
     width: 250px;
+  }
+  
+  #card {
+    background-color: rgba(251, 244, 245, 0.943);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(142, 105, 98);     
+  }
+  #card:hover {
+    background-color: rgba(255, 232, 235, 0.943);
+    border-style: solid;
+    border-color: rgb(142, 105, 98);     
   }
