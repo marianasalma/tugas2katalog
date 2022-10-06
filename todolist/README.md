@@ -21,4 +21,30 @@ Pada form, user akan mengisi data pada input field. Saat submit, forms akan meng
 5. Membuat template html untuk menampilkan data
 6. Add, commit, push ke github
 
+**README Tugas 5**
 
+**Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?** 
+- External CSS disimpan pada satu file yang memiliki ekstensi .css. Style sheet tersebut menyimpan informasi styling yang dapat digunakan untuk seluruh website, sehingga memiliki kelebihan tidak harus mengubah masing-masing elemen HTML. Kelemahannya, proses upload eksternal css, terutama yang membutuhkan beberapa style sheet .css, bisa membuat waktu loading website lebih lama karena download untuk import file yang memiliki informasi styling.
+- Internal CSS disimpan pada file HTML tersebut, yakni pada tag `<style>` di dalam tag `<html>` pada bagian awal file. Kelebihannya, tidak perlu melakukan membuat dan import lagi terhadap file eksternal .css dan mudah melakukan preview jika mengubah styling. Kelemahan dari internal css adalah perubahan yang dilakukan terkait informasi styling hanya diberlakukan pada file tersebut saja, sehingga repetitif.
+- Inline CSS disimpan pada tag elemen HTML menggunakan atribut `style="..."`. Kelebihannya, informasi styling yang ada pada inline CSS hanya berlaku pada elemen yang memiliki atribut dengan informasi styling yang bersesuaian  sehingga cocok digunakan untuk styling elemen secara spesifik. Kelemahannya, membutuhkan waktu yang lama untuk implementasi seluruh styling serta membuat struktur HTML berantakan.
+
+**Jelaskan tag HTML5 yang kamu ketahui.**
+- `<body>` yang mendefinisikan konten body dari file HTML
+- `<a>` yang merupakan hyperlink untuk redirect ke halaman atau section
+- `<img>` untuk memuat gambar yang ingin ditampilkan
+- `<li>` untuk elemen list dan berada di dalam tag `<ul>` untuk list tidak bernomor dan `<ol>` untuk list bernomor
+- `<div>` yang mendefinisikan sebuah section atau block pada halaman
+
+**Jelaskan tipe-tipe CSS selector yang kamu ketahui.**
+CSS selector digunakan untuk mendefinisikan sebuah elemen atau section yang akan diimplementasikan sebuah style CSS.
+- HTML element selector: h1, h2, h3,..., p, button, div. Contoh implementasinya pada style CSS yakni dimulai dengan `h1 { ... }`
+- id: menggunakan atribut pada sebuah elemen dengan `id="id-name"`. Contoh implementasinya pada style CSS yakni dimulai dengan `#id-name { ... }`
+- class: menggunakan atribut pada sebuah elemen dengan `class="class-name"`. Contoh implementasinya pada style CSS yakni dimulai dengan `.class-name { ... }`
+- attribute: melakukan styling untuk elemen dengan atribut tertentu. Contoh implementasinya pada style CSS yakni dimulai dengan `[href] { ... }` jika atributnya merupakan href.
+
+**Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas.**
+1. Mengkonfigurasikan bootstrap sesuai dokumentasi
+2. Menambahkan viewport meta tag untuk meninformasikan browser untuk adjust sesuai viewport device.
+3. Melakukan styling dengan CSS dengan mengubah warna elemen-elemen, font, background, serta layout
+4. Menambahkan cards pada page todolist, melakukan styling pada page tersebut, dan menyambungkannya ke forms
+5. Melakukan adjustment terhadap alignment, padding, dan margin agar lebih rapih
