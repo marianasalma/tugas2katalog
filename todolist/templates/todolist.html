@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo list</title>
@@ -13,6 +14,63 @@
       integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
       crossorigin="anonymous"
     />
+    <script>
+      $(document).ready(function () {
+        const card = (data) => `
+        <div class="col-md-4">
+        <div id="card" class="card p-3 m-3">
+              <div class="card-block">
+                <h4 class="card-title">${data.fields.title}</h4>
+                <h6 class="card-subtitle text-muted pb-2">${data.fields.date}</h6>
+                <p class="card-text p-y-1">${data.fields.description}</p>
+                ${data.fields.is_finished? `<h6 class="card-subtitle text-muted pb-3">✅ Task finished</h6>`
+                  : `<h6 class="card-subtitle text-muted pb-3">❌ Task not finished</h6>`
+                }
+                
+                <div style="display: flex;
+                justify-content: left;
+                align-items: center;
+                gap: 10px;">
+                  
+                  ${
+                    data.fields.is_finished
+                      ? `
+                      <button onclick="window.location.href='/todolist/change-status/${data.pk}/'">
+                        Revert to not finished
+                      </button>`
+                      : `<button onclick="window.location.href='/todolist/change-status/${data.pk}/'"
+                      >
+                      Change to finished
+                    </button>`
+                  }
+      
+                </div>
+              </div>
+            </div>
+            </div>
+            `;
+
+        const add_todo = (data) => {
+          return $("#cards-section").append(card(data));
+        };
+
+        $.get("/todolist/json", function (todo) {
+          todo.map((task) => {
+            add_todo(task);
+          });
+        });
+
+        $("#add").click(function () {
+          $.post("/todolist/add/", {
+            title: $("#title").val(),
+            description: $("#description").val(),
+          }, function (todo) {
+                addCard(todo)
+              })
+            })
+        });
+      
+    </script>
   </head>
 
   <style>
@@ -20,12 +78,12 @@
       background-color: rgba(251, 244, 245, 0.943);
       border-style: solid;
       border-width: 1px;
-      border-color: rgb(142, 105, 98);     
+      border-color: rgb(142, 105, 98);
     }
     #card:hover {
       background-color: rgba(255, 232, 235, 0.943);
       border-style: solid;
-      border-color: rgb(142, 105, 98);     
+      border-color: rgb(142, 105, 98);
     }
   </style>
   <body>
@@ -39,81 +97,102 @@
 
     <div class="py-5">
       <div class="container">
-        <div class="row hidden-md-up">
-          {% csrf_token %} {% comment %} Add the data below this line {%endcomment%} {% for item in list_todolist %}
-          <div class="col-md-4">
-            <div 
-              id="card"
-              class="card p-3 m-3">
-              <div class="card-block">
-                <h4 class="card-title">{{item.title}}</h4>
-                <h6 class="card-subtitle text-muted pb-2">{{item.date}}</h6>
-                <p class="card-text p-y-1">{{item.description}}</p>
-                {% if item.is_finished == False %}
-                <h6 class="card-subtitle text-muted pb-3">❌ Task not finished</h6>
-                
-                {% else %}
-                <h6 class="card-subtitle text-muted pb-3">✅ Task finished</h6>
-    
-              {% endif %}
-                <div style="display: flex;
-                justify-content: left;
-                align-items: center;
-                gap: 10px;">
-                  <form method="POST">
-                    {% csrf_token %}
-                    <button
-                    type="submit"
-                    name="pk_task_delete"
-                    value="{{item.pk}}"
-                    >
-                    Delete
-                  </button>
-                </form>
-                
-                
-                {% if item.is_finished == False %}
-                <form method="POST">
-                  {% csrf_token %}
-                    <button type="submit" name="pk_task" value="{{item.pk}}">
-                      Change to finished
-                    </button>
-                </form>
-                {% else %}
-                <form method="POST">
-                  {% csrf_token %}
-                    <button
-                    type="submit"
-                    name="pk_task_reverse"
-                    value="{{item.pk}}"
-                    >
-                    Revert to not finished
-                  </button>
-              </form>
-              {% endif %}
-
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
+        <div id='cards-section' class="row hidden-md-up">
+          
         </div>
       </div>
     </div>
 
-    
-    <div class="buttons" style="display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 20px;">
-      <button class="m-3" onclick="window.location.href='/todolist/create-task'">
+    <div
+      class="buttons"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+      "
+    >
+      <!-- <button
+        class="m-3"
+        onclick="window.location.href='/todolist/create-task'"
+      >
         Create new task
+      </button> -->
+      <button
+        type="button"
+        class="m-3"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Add Task
       </button>
       <button class="m-3" onclick="window.location.href='/todolist/logout'">
         Logout
       </button>
+    </div>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">New Task</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="card-body">
+              <form method="POST">
+                {% csrf_token %}
+                <div>
+                  <label for="title"><strong>Title</strong></label>
+                  <input
+                    type="text"
+                    name="title"
+                    style="width: 100%"
+                    id="title"
+                  />
+                </div>
+                <div style="margin-top: 20px">
+                  <label for="description"
+                    ><strong>Task description</strong></label
+                  >
+                  <input
+                    style="width: 100%"
+                    type="text"
+                    name="description"
+                    id="description"
+                  />
+                </div>
+                <input
+                  id="add"
+                  value="Daftar"
+                  data-bs-dismiss="modal"
+                  style="
+                    margin-top: 20px;
+                    text-align: center;
+                    background-color: #f2bac2;
+                    border: 2px solid #f2bac2;
+                    font-family: Georgia, 'Times New Roman', Times, serif;
+                    padding: 10px;
+                    color: white;
+                  "
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

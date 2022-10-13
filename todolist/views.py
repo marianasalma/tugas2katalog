@@ -7,7 +7,8 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 import datetime
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.core import serializers
 from django.urls import reverse
 
 # Create your views here.
@@ -18,20 +19,6 @@ def show_todolist(request):
         'list_todolist': data_todolist,
         'username': request.user.username,
     }
-    if request.method == "POST":
-        if request.POST.get('pk_task') is not None:
-            id_current_task = request.POST.get('pk_task')
-            current_task = Task.objects.filter(pk=id_current_task)
-            current_task.update(is_finished=True)
-        elif request.POST.get('pk_task_delete') is not None:
-            id_current_task = request.POST.get('pk_task_delete')
-            current_task = Task.objects.filter(pk=id_current_task)
-            current_task.delete()
-        else:
-            id_current_task = request.POST.get('pk_task_reverse')
-            current_task = Task.objects.filter(pk=id_current_task)
-            current_task.update(is_finished=False)
-
     return render(request, "todolist.html", context)
 
 def register(request):
@@ -77,4 +64,32 @@ def create(request):
         response = HttpResponseRedirect(reverse("todolist:show_todolist")) 
         return response
     return render(request, "createtask.html")
+
+def show_json(request):
+    task = Task.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', task), content_type='application/json')
+
+def add(request):
+    if request.method == 'POST':
+        date = datetime.date.today() 
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        user = request.user
+        task = Task.objects.create(title=title, description=description, date=date, user=user)
+
+        context = {
+            'pk': task.pk,
+            'fields':{
+                'title':task.title,
+                'description':task.description,
+                'is_finished':task.is_finished,
+                'date':task.date,
+            }
+        }
+        return JsonResponse(context)
         
+def change_status(request,pk):
+    task = Task.objects.get(id=pk)
+    task.is_finished = not task.is_finished
+    task.save()
+    return redirect('todolist:show_todolist')
